@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎄 Virtual Christmas Gift</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif;}
+body{
+    background:#000;
+    color:white;
+    overflow:hidden;
+}
+
+/* Snowfall */
+.snowflake{
+    position:fixed;
+    top:-10px;
+    color:white;
+    font-size:12px;
+    animation: fall linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(110vh);}
+}
+
+/* Grid */
+.container{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    padding:20px;
+    max-width:500px;
+    margin:auto;
+    margin-top:40px;
+}
+
+/* Cards */
+.card{
+    perspective:1000px;
+}
+.card-inner{
+    position:relative;
+    width:100%;
+    padding-top:100%;
+    transform-style:preserve-3d;
+    transition:transform 0.8s;
+}
+.card.open .card-inner{
+    transform:rotateY(180deg);
+}
+.card-face{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    backface-visibility:hidden;
+    font-size:18px;
+}
+.front{
+    background:#b30000;
+}
+.back{
+    background:#0a7a0a;
+    transform:rotateY(180deg);
+}
+
+/* Message Modal */
+#message{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.9);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+#message div{
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    max-width:400px;
+    text-align:center;
+}
+
+/* Game */
+.game{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:10px;
+}
+.game div{
+    background:#333;
+    padding:15px;
+    text-align:center;
+    border-radius:10px;
+    cursor:pointer;
+}
+.hidden{color:transparent;}
+
+@media(max-width:480px){
+    .container{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/12/20/audio_1cbbd93c1b.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <div class="card" onclick="openCard(this,'message')">
+    <div class="card-inner">
+      <div class="card-face front">🎁 Open Me</div>
+      <div class="card-face back">💌 Letter</div>
+    </div>
+  </div>
+
+  <div class="card" onclick="openCard(this,'game')">
+    <div class="card-inner">
+      <div class="card-face front">🎮 Game</div>
+      <div class="card-face back">🧠 Play</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-face front">❄️ Snow</div>
+      <div class="card-face back">🎄 Merry Xmas</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-face front">❤️ Love</div>
+      <div class="card-face back">✨ Magic</div>
+    </div>
+  </div>
+</div>
+
+<!-- Message -->
+<div id="message">
+  <div>
+    <h2>💌 Your Letter</h2>
+    <p style="margin-top:10px;">
+      ✍️ EDIT THIS TEXT<br><br>
+      Merry Christmas ❤️  
+      I made this little virtual gift just for you.  
+      Hope it makes you smile 🎄✨
+    </p>
+    <br>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- Game -->
+<div id="game" style="display:none;">
+  <div class="game">
+    <div onclick="flip(this)">🎄</div>
+    <div onclick="flip(this)">🎄</div>
+    <div onclick="flip(this)">⭐</div>
+    <div onclick="flip(this)">⭐</div>
+  </div>
+  <br>
+  <button onclick="closeModal()">Close</button>
+</div>
+
+<script>
+// Snow
+for(let i=0;i<50;i++){
+  let s=document.createElement('div');
+  s.className='snowflake';
+  s.innerHTML='❄';
+  s.style.left=Math.random()*100+'vw';
+  s.style.animationDuration=3+Math.random()*5+'s';
+  s.style.fontSize=8+Math.random()*10+'px';
+  document.body.appendChild(s);
+}
+
+// Card open
+function openCard(card,id){
+  card.classList.add('open');
+  setTimeout(()=>{
+    document.getElementById(id).style.display='flex';
+  },600);
+}
+
+function closeModal(){
+  document.getElementById('message').style.display='none';
+  document.getElementById('game').style.display='none';
+}
+
+// Mini game
+let last=null;
+function flip(el){
+  if(el.classList.contains('hidden')) return;
+  el.classList.add('hidden');
+  if(!last){ last=el; return;}
+  if(last.innerHTML!==el.innerHTML){
+    setTimeout(()=>{
+      el.classList.remove('hidden');
+      last.classList.remove('hidden');
+      last=null;
+    },500);
+  } else last=null;
+}
+</script>
+
+</body>
+</html>
