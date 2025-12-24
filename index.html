@@ -4,110 +4,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎄 Virtual Christmas Gift</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif;}
-body{
-    background:#000;
-    color:white;
-    overflow:hidden;
-}
+body{background:#000;color:white;overflow:hidden;}
 
 /* Snowfall */
 .snowflake{
-    position:fixed;
-    top:-10px;
-    color:white;
-    font-size:12px;
-    animation: fall linear infinite;
+  position:fixed;
+  top:-10px;
+  color:white;
+  font-size:12px;
+  animation: fall linear infinite;
 }
-@keyframes fall{
-    to{transform:translateY(110vh);}
-}
+@keyframes fall{to{transform:translateY(110vh);}}
 
-/* Grid */
+/* Grid Cards */
 .container{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    padding:20px;
-    max-width:500px;
-    margin:auto;
-    margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  padding:20px;
+  max-width:500px;
+  margin:auto;
+  margin-top:40px;
 }
-
-/* Cards */
-.card{
-    perspective:1000px;
-}
+.card{perspective:1000px;cursor:pointer;}
 .card-inner{
-    position:relative;
-    width:100%;
-    padding-top:100%;
-    transform-style:preserve-3d;
-    transition:transform 0.8s;
+  position:relative;
+  width:100%;
+  padding-top:100%;
+  transform-style:preserve-3d;
+  transition:transform 0.8s;
 }
-.card.open .card-inner{
-    transform:rotateY(180deg);
-}
+.card.open .card-inner{transform:rotateY(180deg);}
 .card-face{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:15px;
-    backface-visibility:hidden;
-    font-size:18px;
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:15px;
+  backface-visibility:hidden;
+  font-size:18px;
+  text-align:center;
+  padding:10px;
 }
-.front{
-    background:#b30000;
-}
-.back{
-    background:#0a7a0a;
-    transform:rotateY(180deg);
-}
+.front{background:#b30000;}
+.back{background:#0a7a0a;transform:rotateY(180deg);}
 
-/* Message Modal */
-#message{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.9);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+/* Modals */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:white;
+  padding:20px;
 }
-#message div{
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    max-width:400px;
-    text-align:center;
+.modal-content{
+  background:#111;
+  padding:20px;
+  border-radius:15px;
+  max-width:400px;
+  text-align:center;
 }
 
 /* Game */
 .game{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin-top:10px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:10px;
 }
 .game div{
-    background:#333;
-    padding:15px;
-    text-align:center;
-    border-radius:10px;
-    cursor:pointer;
+  background:#333;
+  padding:15px;
+  text-align:center;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:24px;
 }
 .hidden{color:transparent;}
 
 @media(max-width:480px){
-    .container{grid-template-columns:1fr;}
+  .container{grid-template-columns:1fr;}
 }
 </style>
 </head>
-
 <body>
 
 <!-- Background Music -->
@@ -115,24 +101,28 @@ body{
   <source src="https://cdn.pixabay.com/audio/2022/12/20/audio_1cbbd93c1b.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Instruction -->
+<h2 style="text-align:center;margin-top:20px;">🎁 Tap a card to open your gift</h2>
+
+<!-- Cards -->
 <div class="container">
-  <div class="card" onclick="openCard(this,'message')">
+  <div class="card" onclick="openModal('letter')">
     <div class="card-inner">
-      <div class="card-face front">🎁 Open Me</div>
-      <div class="card-face back">💌 Letter</div>
+      <div class="card-face front">💌 Letter</div>
+      <div class="card-face back">Open Letter</div>
     </div>
   </div>
 
-  <div class="card" onclick="openCard(this,'game')">
+  <div class="card" onclick="openModal('game')">
     <div class="card-inner">
       <div class="card-face front">🎮 Game</div>
-      <div class="card-face back">🧠 Play</div>
+      <div class="card-face back">🧠 Tap to Play</div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-inner">
-      <div class="card-face front">❄️ Snow</div>
+      <div class="card-face front">❄ Snow</div>
       <div class="card-face back">🎄 Merry Xmas</div>
     </div>
   </div>
@@ -145,40 +135,35 @@ body{
   </div>
 </div>
 
-<!-- Message -->
-<div id="message">
-  <div>
+<!-- Letter Modal -->
+<div id="letter" class="modal">
+  <div class="modal-content">
     <h2>💌 Your Letter</h2>
     <p style="margin-top:10px;">
-      ✍️MY CLOWN🤡🧿❤️ <br><br>
-      Merry Christmas Dearest Clown🤡❤️  
-      As u said ma Vella hu so I made it for you in my vellaness🥀I am very blessed to have you bot noobdie hahahahahahaha😈😈🥵🥵😱😱😎😎😍😍🤪.  
-      Hope it makes you smile and changes your mood to treat me a "DOUBLE EGG CHICKEN ROLL EXTRA SPICY (2x quantity)"😋😋 🎄✨
+      Dear You ❤️<br><br>
+      Merry Christmas 🎄✨<br>
+      I made this small virtual gift just for you.<br>
+      Thank you for always being there.<br>
+      Hope this brings a big smile 😊
     </p>
     <br>
-    <button onclick="closeModal()">Close</button>
+    <button onclick="closeModal('letter')">Close</button>
   </div>
 </div>
 
-<!-- Game -->
-<div id="game" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.9);
-align-items:center;
-justify-content:center;
-flex-direction:column;
-color:white;
-">
-  <div class="game">
-    <div onclick="flip(this)">🎄</div>
-    <div onclick="flip(this)">🎄</div>
-    <div onclick="flip(this)">⭐</div>
-    <div onclick="flip(this)">⭐</div>
+<!-- Game Modal -->
+<div id="game" class="modal">
+  <div class="modal-content">
+    <h2>🧠 Memory Game</h2>
+    <div class="game">
+      <div onclick="flip(this)">🎄</div>
+      <div onclick="flip(this)">🎄</div>
+      <div onclick="flip(this)">⭐</div>
+      <div onclick="flip(this)">⭐</div>
+    </div>
+    <br>
+    <button onclick="closeModal('game')">Close</button>
   </div>
-  <br>
-  <button onclick="closeModal()">Close</button>
 </div>
 
 <script>
@@ -193,20 +178,17 @@ for(let i=0;i<50;i++){
   document.body.appendChild(s);
 }
 
-// Card open
-function openCard(card,id){
-  card.classList.add('open');
-  setTimeout(()=>{
-    document.getElementById(id).style.display='flex';
-  },600);
+// Open modal
+function openModal(id){
+  document.getElementById(id).style.display='flex';
 }
 
-function closeModal(){
-  document.getElementById('message').style.display='none';
-  document.getElementById('game').style.display='none';
+// Close modal
+function closeModal(id){
+  document.getElementById(id).style.display='none';
 }
 
-// Mini game
+// Memory Game Logic
 let last=null;
 function flip(el){
   if(el.classList.contains('hidden')) return;
@@ -221,6 +203,5 @@ function flip(el){
   } else last=null;
 }
 </script>
-
 </body>
 </html>
