@@ -161,7 +161,16 @@ body{
 </div>
 
 <!-- Game -->
-<div id="game" style="display:none;">
+<div id="game" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.9);
+align-items:center;
+justify-content:center;
+flex-direction:column;
+color:white;
+">
   <div class="game">
     <div onclick="flip(this)">🎄</div>
     <div onclick="flip(this)">🎄</div>
