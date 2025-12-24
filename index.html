@@ -98,9 +98,10 @@ h2{text-align:center;margin-top:20px;}
 <body>
 
 <!-- Background Music -->
-<audio autoplay loop>
+<audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/12/20/audio_1cbbd93c1b.mp3?filename=holiday-piano-116551.mp3" type="audio/mpeg">
 </audio>
+  
 
 <!-- Instruction -->
 <h2>🎁 Tap a card to open your gift</h2>
@@ -162,6 +163,15 @@ h2{text-align:center;margin-top:20px;}
 </div>
 
 <script>
+
+// 🎵 Background Music (starts on first tap)
+document.addEventListener("click", function () {
+  const music = document.getElementById("bgMusic");
+  if (music && music.paused) {
+    music.play();
+  }
+}, { once: true });
+
 // Snow
 for(let i=0;i<50;i++){
   let s=document.createElement('div');
