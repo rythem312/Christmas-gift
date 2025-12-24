@@ -7,6 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif;}
 body{background:#000;color:white;overflow:hidden;}
+h2{text-align:center;margin-top:20px;}
 
 /* Snowfall */
 .snowflake{
@@ -75,7 +76,7 @@ body{background:#000;color:white;overflow:hidden;}
 /* Game */
 .game{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
   margin-top:10px;
 }
@@ -98,11 +99,11 @@ body{background:#000;color:white;overflow:hidden;}
 
 <!-- Background Music -->
 <audio autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2022/12/20/audio_1cbbd93c1b.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/12/20/audio_1cbbd93c1b.mp3?filename=holiday-piano-116551.mp3" type="audio/mpeg">
 </audio>
 
 <!-- Instruction -->
-<h2 style="text-align:center;margin-top:20px;">🎁 Tap a card to open your gift</h2>
+<h2>🎁 Tap a card to open your gift</h2>
 
 <!-- Cards -->
 <div class="container">
@@ -119,20 +120,6 @@ body{background:#000;color:white;overflow:hidden;}
       <div class="card-face back">🧠 Tap to Play</div>
     </div>
   </div>
-
-  <div class="card">
-    <div class="card-inner">
-      <div class="card-face front">❄ Snow</div>
-      <div class="card-face back">🎄 Merry Xmas</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-inner">
-      <div class="card-face front">❤️ Love</div>
-      <div class="card-face back">✨ Magic</div>
-    </div>
-  </div>
 </div>
 
 <!-- Letter Modal -->
@@ -140,11 +127,11 @@ body{background:#000;color:white;overflow:hidden;}
   <div class="modal-content">
     <h2>💌 BOT KA LETTER</h2>
     <p style="margin-top:10px;">
-      MY CLOWN🤡🧿❤️<br><br>
-      Merry Christmas Dearest Clown🤡🎄✨<br>
-      Since u said I am Vella So I  made this for you in my "PEAK" Vellaness🥀I am very grateful to have you bot noobdie pro max bahajaaaaaahahah😎😎😈😈😈🔥🔥🤪🤪😱😱.<br>
+      Dear CLOWN🤡❤️<br><br>
+      Merry Christmas to you clown🤡🧿 🎄✨<br>
+      Since u said I am a "VELLA" so I made this for you in my "PEAKISM" of "VELLANESS"hehehe😁I am very grateful to have you🧿Bot noobdie pro max bahahhahahha🔥🔥🤪🤪🥵🥵😈😈😈.<br>
       .<br>
-      Hope this brings a smile to you and changes your Mind to treat me with a Very  very special "DOUBLE EGG CHICKEN ROLL EXTRA SPICY NO MAYO,NO RED CHILLI WITH ADD ON CHEESE(2x Quantity) 😊😋😋
+      Hope this brings a smile and changes your mood to treat me with a very special "DOUBLE EGG CHICKEN ROLL NO MAYO,NO RED CHILLI AND ADD ON CHEESE SLICE MADE IN AMUL BUTTER"(2x Quantity)Afcourse tere paiso sa khauga🤪😋😋😊 #clown #bot #vellagiri #chicken🤪
     </p>
     <br>
     <button onclick="closeModal('letter')">Close</button>
@@ -156,23 +143,19 @@ body{background:#000;color:white;overflow:hidden;}
   <div class="modal-content">
     <h2>🧠 Memory Game</h2>
     <div class="game">
-  <div onclick="flip(this)">🤡</div>
-  <div onclick="flip(this)">🥀</div>
-  <div onclick="flip(this)">🕋</div>
-  <div onclick="flip(this)">😈</div>
-  <div onclick="flip(this)">🤡</div>
-  <div onclick="flip(this)">😈</div>
-  <div onclick="flip(this)">🧠</div>
-  <div onclick="flip(this)">🧿</div>
-  <div onclick="flip(this)">🥀</div>
-  <div onclick="flip(this)">🧿</div>
-  <div onclick="flip(this)">🕋</div>
-  <div onclick="flip(this)">🧠</div>
-  <div onclick="flip(this)">🤲</div>
-  <div onclick="flip(this)">❤️</div>
-  <div onclick="flip(this)">🤲</div>
-  <div onclick="flip(this)">❤️</div>
-</div>
+      <div onclick="flip(this)">🕋</div>
+      <div onclick="flip(this)">🤡</div>
+      <div onclick="flip(this)">🤡</div>
+      <div onclick="flip(this)">🕋</div>
+      <div onclick="flip(this)">🤲</div>
+      <div onclick="flip(this)">🥀</div>
+      <div onclick="flip(this)">❤️</div>
+      <div onclick="flip(this)">🧿</div>
+      <div onclick="flip(this)">🤲</div>
+      <div onclick="flip(this)">🥀</div>
+      <div onclick="flip(this)">❤️</div>
+      <div onclick="flip(this)">🧿</div>
+    </div>
     <br>
     <button onclick="closeModal('game')">Close</button>
   </div>
